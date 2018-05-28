@@ -1,3 +1,5 @@
+var elementTarget = document.getElementsByTagName("a");
+
 // get y position
 
 function getOffset(el) {
@@ -12,8 +14,6 @@ function getOffset(el) {
 }
 
 //debounce
-
-var elementTarget = document.getElementsByTagName("a");
 
 function debounce(func, wait, immediate) {
   var timeout;
@@ -41,7 +41,16 @@ var myEfficientFn = debounce(function() {
       getOffset(elementTarget[i]).top + elementTarget[i].offsetHeight
     ) {
       elementTarget[i].style.color = "green";
+      //get child nodes and change color
+      var nodes = elementTarget[i].childNodes;
+      var j;
+      for (var j = 0; j < nodes.length; j++) {
+        if (nodes[j].style) {
+          nodes[j].style.color = "green";
+        }
+      }
     }
+    delete elementTarget[i];
   }
 }, 250);
 
